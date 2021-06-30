@@ -11,6 +11,7 @@ public class morpionClass{
 	public static char c8 = '8';
 	public static char c9 = '9';
 	public static boolean player1 = true;
+	public static int turn = 0;
 	public static void main(String[] args){
 		System.out.println("Bonjour");
 		Scanner input = new Scanner(System.in);
@@ -19,7 +20,6 @@ public class morpionClass{
 		System.out.println("player2 choose your name:");
 		String player2Name = input.nextLine();
 		boolean end = false;
-		int turn = 0;
 		while (!end){
 			aff();
 			boolean hasplayed = false;
@@ -58,55 +58,55 @@ public class morpionClass{
 		switch(playerchoice){
 			case "1":
 				if (c1 != 'X' && c1 != 'O'){
-					c1 = player1 == true ? 'X' : 'O';
+					c1 = player1 ? 'X' : 'O';
 					return true;
 				}
 				return false;
 			case "2":
 				if (c2 != 'X' && c2 != 'O'){
-					c2 = player1 == true ? 'X' : 'O';
+					c2 = player1 ? 'X' : 'O';
 					return true;
 				}
 				return false;
 			case "3":
 				if (c3 != 'X' && c3 != 'O'){
-					c3 = player1 == true ? 'X' : 'O';
+					c3 = player1 ? 'X' : 'O';
 					return true;
 				}
 				return false;
 			case "4":
 				if (c4 != 'X' && c4 != 'O'){
-					c4 = player1 == true ? 'X' : 'O';
+					c4 = player1 ? 'X' : 'O';
 					return true;
 				}
 				return false;
 			case "5":
 				if (c5 != 'X' && c5 != 'O'){
-					c5 = player1 == true ? 'X' : 'O';
+					c5 = player1 ? 'X' : 'O';
 					return true;
 				}
 				return false;
 			case "6":
 				if (c6 != 'X' && c6 != 'O'){
-					c6 = player1 == true ? 'X' : 'O';
+					c6 = player1 ? 'X' : 'O';
 					return true;
 				}
 				return false;
 			case "7":
 				if (c7 != 'X' && c7 != 'O'){
-					c7 = player1 == true ? 'X' : 'O';
+					c7 = player1 ? 'X' : 'O';
 					return true;
 				}
 				return false;
 			case "8":
 				if (c8 != 'X' && c8 != 'O'){
-					c8 = player1 == true ? 'X' : 'O';
+					c8 = player1 ? 'X' : 'O';
 					return true;
 				}
 				return false;
 			case "9":
 				if (c9 != 'X' && c9 != 'O'){
-					c9 = player1 == true ? 'X' : 'O';
+					c9 = player1 ? 'X' : 'O';
 					return true;
 				}
 				return false;
@@ -115,7 +115,9 @@ public class morpionClass{
 		}
 	}
 	public static boolean finish(int turn, boolean player1, String player1Name, String player2Name){
-		if ( (c1 == c2 && c2 == c3) || ( c4 == c5 && c5 == c6) || ( c7 == c8 && c8 == c9) || ( c1 == c4 && c4 == c7) || ( c2 == c5 && c5 == c8) || ( c3 == c6 && c6 == c9) || ( c2 == c5 && c5 == c8) || ( c3 == c5 && c5 == c7)){
+		if ( (c1 == c2 && c2 == c3) || ( c4 == c5 && c5 == c6) || ( c7 == c8 && c8 == c9) ||
+				( c1 == c4 && c4 == c7) || ( c2 == c5 && c5 == c8) || ( c3 == c6 && c6 == c9) ||
+				( c1 == c5 && c5 == c9) || ( c3 == c5 && c5 == c7)){
 			if(player1){
 				System.out.println(player1Name + " victory");
 				return true;
@@ -146,6 +148,7 @@ public class morpionClass{
 					c8 = '8';
 					c9 = '9';
 					player1 = true;
+					turn = 0;
 					return false;
 				case "2":
 					return true;

@@ -12,7 +12,7 @@ public class morpionf
 	OUT: print on screen Instruction for the player, the grid of the game, the winner if any or tie.*/
 	
 	
-	public static boolean winCheck(String[][] table, boolean player1, boolean multiplayer, String player1Name, String player2Name)
+	public static boolean winCheck(String[][] table, boolean player1, String player1Name, String player2Name)
 	{/*check the grid for a winner
 		check if a row, a line or one of the two diagonals have 3 of a type
 		entry: the game table
@@ -52,13 +52,13 @@ public class morpionf
 				if (player1)
 				{
 					System.out.println(player2Name+" win!");
-					return true;
+
 				}
 				else
 				{
 					System.out.println(player1Name+" win!");
-					return true;
 				}
+				return true;
 			}
 		
 		}
@@ -66,42 +66,44 @@ public class morpionf
 	}
 	
 	
-	public static void iaPlay(String [][] table, int turn)
+	public static void iaPlay(String [][] table, int turn, String IASymbol)
 	{/* make the IA play following the following pattern: play the winning possibility if any, else avoid the winning possibility of the player else play something else
 		IN:turn number, the grid
 		OUT: modify the grid accordingly*/
+		String otherSymbol = IASymbol.equals("X") ? "O" : "X";
+		try{Thread.sleep(1000);}catch(InterruptedException e){System.out.println("interrupted");}
 		if (turn < 3)
 		{
 			if (table[1][1].equals(" "))
 			{
-				table[1][1] = "O";
+				table[1][1] = IASymbol;
 			}
 			else
 			{
-				table[0][0] = "O";
+				table[0][0] = IASymbol;
 			}
 		}
 		else 
 		{
-			boolean hasPlayed = false;
-			hasPlayed = requiredPlay(table, "O"); //IA play if it can win!
+			boolean hasPlayed;
+			hasPlayed = requiredPlay(table, IASymbol, IASymbol); //IA play if it can win!
 			if (!hasPlayed)
 			{
-				hasPlayed = requiredPlay(table, "X");//IA play for not loosing
+				hasPlayed = requiredPlay(table, otherSymbol, IASymbol);//IA play for not loosing
 			}
 			if (!hasPlayed)
 			{
-				hasPlayed = selectBestChoice(table);
+				hasPlayed = selectBestChoice(table, IASymbol, otherSymbol);
 			}
 			if (!hasPlayed)
 			{
-				fillingPlay(table);//no winning possibility IA just fill a case
+				fillingPlay(table, IASymbol);//no winning possibility IA just fill a case
 			}
 		}
 	}
 	
 	
-	public static boolean requiredPlay(String[][] table, String toCheck)
+	public static boolean requiredPlay(String[][] table, String toCheck, String IASymbol)
 	{/* make the IA play the winning possibility if any, else avoid the winning possibility of the player.
 		IN:the string to check(either the IA sign to win or the player sign not to lose), the grid
 		OUT: if one of the case is reached play and return true else return false*/
@@ -165,22 +167,22 @@ public class morpionf
 			}
 			if (lineOCount == 2 && lineEmptyCount == 1 )
 			{
-				table[lineEmptyCoordinaterow][lineEmptyCoordinatecol] = "O";
+				table[lineEmptyCoordinaterow][lineEmptyCoordinatecol] = IASymbol;
 				hasPlayed = true;
 			}
 			else if (colOCount == 2 && colEmptyCount == 1 )
 			{
-				table[colEmptyCoordinaterow][colEmptyCoordinatecol] = "O";
+				table[colEmptyCoordinaterow][colEmptyCoordinatecol] = IASymbol;
 				hasPlayed = true;
 			}
 			else if (diagonalOcount == 2 && diagonalEmptyCount == 1 )
 			{
-				table[diagonalEmptyCoordinate][diagonalEmptyCoordinate] = "O";
+				table[diagonalEmptyCoordinate][diagonalEmptyCoordinate] = IASymbol;
 				hasPlayed = true;
 			}
 			else if (rDiagonalOcount == 2 && rDiagonalEmptyCount == 1 )
 			{
-				table[rDiagonalEmptyCoordinate][2-rDiagonalEmptyCoordinate] = "O";
+				table[rDiagonalEmptyCoordinate][2-rDiagonalEmptyCoordinate] = IASymbol;
 				hasPlayed = true;
 			}
 			if (hasPlayed)
@@ -192,7 +194,7 @@ public class morpionf
 	}
 	
 	
-	public static void fillingPlay(String[][] table)
+	public static void fillingPlay(String[][] table, String IASymbol)
 	{/* make the IA play the first empty case
 		IN:the grid
 		OUT: cross the first empty case, no return*/
@@ -203,7 +205,7 @@ public class morpionf
 			{
 				if (table[line][data].equals(" "))
 				{
-					table[line][data] = "O";
+					table[line][data] = IASymbol;
 					hasPlayed = true;
 					break;
 				}
@@ -216,12 +218,12 @@ public class morpionf
 	}
 	
 	
-	public static boolean selectBestChoice(String[][] table)
+	public static boolean selectBestChoice(String[][] table, String IASymbol, String OtherSymbol)
 	{/* in case of non winning or non losing turn check the best answer if any
 		IN:the grid
 		OUT: cross the first best case, return true if played, false else*/
 		boolean hasPlayed = false;
-		HashMap<Integer,Integer> pointPossibility = new HashMap<Integer, Integer>();
+		HashMap<Integer,Integer> pointPossibility = new HashMap<>();
 		pointPossibility.put(0,0);
 		pointPossibility.put(1,0);
 		pointPossibility.put(2,0);
@@ -234,10 +236,10 @@ public class morpionf
 		
 		for (int line = 0; line <3; line++)
 		{
-			ArrayList<Integer> lineEmptyCase = new ArrayList<Integer>();
-			ArrayList<Integer> colEmptyCase = new ArrayList<Integer>();
-			ArrayList<Integer> diagonalEmptyCase = new ArrayList<Integer>();
-			ArrayList<Integer> rDiagonalEmptyCase = new ArrayList<Integer>();
+			ArrayList<Integer> lineEmptyCase = new ArrayList<>();
+			ArrayList<Integer> colEmptyCase = new ArrayList<>();
+			ArrayList<Integer> diagonalEmptyCase = new ArrayList<>();
+			ArrayList<Integer> rDiagonalEmptyCase = new ArrayList<>();
 			boolean lineWithoutX = true;
 			boolean colWithoutX = true;
 			boolean diagonalWithoutX = true;
@@ -246,7 +248,7 @@ public class morpionf
 			{
 				if (line == 0)
 				{
-					if (table[data][data].equals("X"))
+					if (table[data][data].equals(OtherSymbol))
 					{
 						diagonalWithoutX = false;
 					}
@@ -254,7 +256,7 @@ public class morpionf
 					{
 						diagonalEmptyCase.add(data * 11);
 					}
-					if (table[data][2-data].equals("X"))
+					if (table[data][2-data].equals(OtherSymbol))
 					{
 						rDiagonalWithoutX = false;
 					}
@@ -263,7 +265,7 @@ public class morpionf
 						rDiagonalEmptyCase.add(data * 10 + (2-data));
 					}
 				}
-				if (table[line][data].equals("X"))
+				if (table[line][data].equals(OtherSymbol))
 				{
 					lineWithoutX = false;
 				}
@@ -272,7 +274,7 @@ public class morpionf
 					lineEmptyCase.add(line * 10 + data);
 					
 				}
-				if (table[data][line].equals("X"))
+				if (table[data][line].equals(OtherSymbol))
 				{
 					colWithoutX = false;
 				}
@@ -284,9 +286,8 @@ public class morpionf
 			}
 			if (lineWithoutX)
 			{
-				for (int item = 0; item < lineEmptyCase.size(); item++)
-				{
-					pointPossibility.put(lineEmptyCase.get(item), pointPossibility.get(lineEmptyCase.get(item)) + 1);
+				for (Integer integer : lineEmptyCase) {
+					pointPossibility.put(integer, pointPossibility.get(integer) + 1);
 				}
 			}
 			if (colWithoutX)
@@ -328,31 +329,24 @@ public class morpionf
 		{
 			hasPlayed = true;
 			int col = coordinate % 10;
-			int line = (int)(coordinate - coordinate % 10) / 10;
-			table[line][col] = "O";
+			int line = (coordinate - coordinate % 10) / 10;
+			table[line][col] = IASymbol;
 		}
 		return hasPlayed;
 	}
 	
 	
-	public static boolean chooseMultiplayer(Scanner playerAsk)
+	public static String chooseMultiplayer(Scanner playerAsk)
 	{/*ensure a valid answer
 	In: player choice
 	Out: if the game is multiplayer*/	
 		String input = " ";
-		while (!input.equals("1") && !input.equals("2"))
+		while (!input.equals("1") && !input.equals("2") && !input.equals("3"))
 		{
-			System.out.println("Welcome!\ntype:\n1 to play against IA\n2 to play against another player(hot seat)");
+			System.out.println("Welcome!\ntype:\n1 to play against IA\n2 to play against another player(hot seat)\n3 3 for two IA to compete against each other");
 			input = playerAsk.nextLine();
 		}
-		if (input.equals("2"))
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return input;
 	}
 	
 	
@@ -385,18 +379,18 @@ public class morpionf
 	}
 	
 	
-	public static void validInput(String[][] table, boolean player1, Scanner playerAsk, int randomStart, String player1Name, String player2Name, int turn, boolean multiplayer)
+	public static void validInput(String[][] table, Scanner playerAsk, int randomStart, String player1Name, String player2Name, int turn, String multiplayer)
 	{/*Ask the current player for valid coordinate and ensure they are.
 	IN: the grid, player's turn, entry of the current player
 	OUT: none*/
 		boolean validAnswer = false;
 		while (!validAnswer)
 		{
-			if (!multiplayer || turn % 2 == randomStart)
+			if (multiplayer.equals("1") || turn % 2 == randomStart)
 			{
 				System.out.println(player1Name + " ,choisissez votre ligne et colonne (2 chiffres entre 1 et 3):");
 			}
-			else
+			else if (multiplayer.equals("2") && turn % 2 != randomStart)
 			{
 				System.out.println(player2Name + " ,choisissez votre ligne et colonne (2 chiffres entre 1 et 3):");
 			}
@@ -411,7 +405,7 @@ public class morpionf
 					int colNumber = Integer.valueOf(colChoice) - 1;//because we ask for between 1 and 3 number and computer start from 0
 					if (table[lineNumber][colNumber].equals(" "))
 					{
-						if (player1 || !multiplayer)
+						if (turn % 2 == randomStart)
 						{
 							table[lineNumber][colNumber] = "X";
 						}
@@ -435,17 +429,16 @@ public class morpionf
 	public static void main(String[] arg)
 	{/*Main programm*/
 		int randomStart = (int)(0.5 + Math.random());
-		boolean player1 = true;
-		if (randomStart == 0)
-		{
-		player1 = false; //current player is player1 if true player2 if false
-		}
+		boolean player1 = randomStart == 1;
 		Scanner playerAsk = new Scanner(System.in);
-		boolean multiplayer = chooseMultiplayer(playerAsk);
-		System.out.println("tapez le nom du premier joueur");
-		String player1Name = playerAsk.nextLine() ;
-		String player2Name = "IA";
-		if (multiplayer)
+		String multiplayer = chooseMultiplayer(playerAsk);
+		String player1Name = "IAfirst";
+		if (!multiplayer.equals("3")) {
+			System.out.println("tapez le nom du premier joueur");
+			player1Name = playerAsk.nextLine();
+		}
+		String player2Name = multiplayer.equals("3") ? "IAsecond" : "IA";
+		if (multiplayer.equals("2"))
 		{
 			System.out.println("tapez le nom du second joueur");
 			player2Name = playerAsk.nextLine() ;
@@ -460,17 +453,29 @@ public class morpionf
 		printMorpion(table);
 		while (turn < 9 && !winner){
 			turn ++;
-			if (multiplayer || turn % 2 == randomStart) // player play one turn and computer the other in monoplayer
+			if (multiplayer.equals("2") || multiplayer.equals("1") && turn % 2 == randomStart) // player play one turn and computer the other in monoplayer
 			{
-				validInput(table, player1, playerAsk, randomStart, player1Name, player2Name, turn, multiplayer);
+				validInput(table, playerAsk, randomStart, player1Name, player2Name, turn, multiplayer);
 			}
-			else if (!multiplayer && turn % 2 == (1 - randomStart)){
-				iaPlay(table, turn);
-				System.out.println("IA has played!");
+			else if (multiplayer.equals("1") && turn % 2 == (1 - randomStart) || multiplayer.equals("3")){
+				String IASymbol = turn % 2 == randomStart ? "X" : "O";
+				iaPlay(table, turn, IASymbol);
+				if (multiplayer.equals("3")){
+					if (turn % 2 == randomStart ){
+						System.out.println(player1Name+" has played!");
+					}
+					else {
+						System.out.println(player2Name+" has played!");
+					}
+				}
+				else{
+					System.out.println("IA has played!");
+				}
+
 			}
 			player1 = !player1;
 			printMorpion(table);
-			winner = winCheck(table, player1, multiplayer, player1Name, player2Name);	
+			winner = winCheck(table, player1, player1Name, player2Name);
 		}
 		if (turn == 9 && !winner)
 		{
