@@ -4,14 +4,34 @@ public class exo_2 {
         for (int a:age_test){
             quelPermis(a);
         }
+        System.out.println(MesMaths.plusGrand2(2,3));
+        MesMaths.tableMultiplication(5,1,15);
+        MesMaths.whileTableMultiplication(5,1,15);
+        MesMaths.doWhileTableMultiplication(5,1,15);
+        System.out.println(ChaineDeCaractere.countMaj("AzerTyuIO"));
+        assert(ChaineDeCaractere.countMaj("AzerTyuIO")==4);
+        assert(ChaineDeCaractere.isValidPassword("AzerTyuIO0"));
+        assert ChaineDeCaractere.isValidPassword("Azer"):"Not Valid";
+        System.out.println(ChaineDeCaractere.NbDeA("AzerTyuIO0"));
+        System.out.println(ChaineDeCaractere.plusHauteLettre("AzerTyuIO0"));
+        System.out.println(ChaineDeCaractere.palindrome("AzerTyuIO0"));
+        System.out.println(ChaineDeCaractere.palindrome("aaa"));
+        System.out.println(ChaineDeCaractere.reverse("AzerTyuIO0"));
+        System.out.println(ChaineDeCaractere.StringSansE("AzerTyuIO0"));
+        System.out.println(ChaineDeCaractere.stringSansEspace("   AzerT  yuIO0   "));
+        System.out.println(ChaineDeCaractere.stringSansEspaceAvantEtApres("   AzerT  yuIO0   "));
+        System.out.println(ChaineDeCaractere.stringSansMajuscule("   AzerT  yuIO0   "));
+        System.out.println(ChaineDeCaractere.StringSansVoyelle("   AzerT  yuIO0   "));
+        assert(ChaineDeCaractere.palindrome("aaa")):true;
+        System.out.println(ChaineDeCaractere.isValid("aaa"));
+        System.out.println(ChaineDeCaractere.isValid("aaaaaaaaa"));
+        System.out.println(ChaineDeCaractere.isValid(""));
+        System.out.println(ChaineDeCaractere.isValid("A1a"));
+        System.out.println(ChaineDeCaractere.isValid("A1anbvdfhe"));
+
+
     }
     public static boolean estMajeur(int age){ return age >=18; }
-    public static String signe(double age){ return age == 0 ? "nul" : age < 0 ? "négatif" : "positif"; }
-    public static int plusGrand2(int nb1, int nb2){ return nb1 > nb2 ? nb1 : nb2; }
-    public static int plusPetit2(int nb1, int nb2){ return nb1 < nb2 ? nb1 : nb2; }
-    public static int plusPetit3(int nb1, int nb2, int nb3){ return plusPetit2(plusPetit2(nb1,nb2),nb3); }
-    public static int plusGrand3(int nb1, int nb2, int nb3){ return plusGrand2(plusGrand2(nb1,nb2),nb3); }
-    public static boolean positifsOuPas(int n1, int n2, int n3){ return n1 > 0 && n2 > 0 && n3 > 0; }
     public static void quelPermis(int age){System.out.println(age < 16 ? "Passager d'un véhicule" : age < 18 ? "Eligible conduite accompagnée" : "Elligible Permis B");}
     public static String capitale(String pays){
         return switch (pays) {
@@ -25,5 +45,4 @@ public class exo_2 {
             default -> "Inconnu";
         };
     }
-
 }
