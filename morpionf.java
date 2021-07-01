@@ -2,6 +2,8 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static java.lang.Integer.parseInt;
+
 
 public class morpionf
 {/*Author: thannajo
@@ -280,7 +282,7 @@ public class morpionf
 				}
 				else if (colWithoutX && table[data][line].equals(" "))
 				{
-					lineEmptyCase.add(10 * data + line);
+					colEmptyCase.add(10 * data + line);
 					
 				}
 			}
@@ -401,8 +403,8 @@ public class morpionf
 				String colChoice = "" + playerchoice.charAt(1);
 				if ("123".contains(lineChoice) && "123".contains(colChoice))
 				{
-					int lineNumber = Integer.valueOf(lineChoice) - 1;//because we ask for between 1 and 3 number and computer start from 0
-					int colNumber = Integer.valueOf(colChoice) - 1;//because we ask for between 1 and 3 number and computer start from 0
+					int lineNumber = parseInt(lineChoice) - 1;//because we ask for between 1 and 3 number and computer start from 0
+					int colNumber = parseInt(colChoice) - 1;//because we ask for between 1 and 3 number and computer start from 0
 					if (table[lineNumber][colNumber].equals(" "))
 					{
 						if (turn % 2 == randomStart)
