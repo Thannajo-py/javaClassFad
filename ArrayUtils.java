@@ -13,6 +13,13 @@ public class ArrayUtils {
         }
         System.out.println(solution + "]");
     }
+    public static void printTab(Bataille.Cards[] tab) {
+        String solution = "[" + tab[0];
+        for (int i = 1; i < tab.length; i++) {
+            solution += ", " + tab[i];
+        }
+        System.out.println(solution + "]");
+    }
     /** Retourne la valeur maximum du tableau */
     public static int getMax(int[] tab) {
         int max = tab[0];
@@ -94,4 +101,20 @@ public class ArrayUtils {
         }
         return tab;
     }
+    public static Bataille.Cards[] remove(Bataille.Cards[] pTab, int pIndiceASupprimer) {
+        Bataille.Cards[] tab = new Bataille.Cards[pTab.length - 1];
+        int pTabi = 0;
+        int tabi = 0;
+        while (tabi < tab.length) {
+            if (pTabi == pIndiceASupprimer){
+                pTabi++;
+                continue;
+            }
+            tab[tabi] = pTab[pTabi];
+            tabi++;
+            pTabi++;
+        }
+        return tab;
+    }
+
 }

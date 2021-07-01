@@ -25,5 +25,7 @@ public class Main {
         ArrayUtils.printTab(ArrayUtils.add(table,7));
         System.out.print("suppression case 3 = ");
         ArrayUtils.printTab(ArrayUtils.remove(table,3));
+
     }
+
 }
