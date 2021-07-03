@@ -80,9 +80,24 @@ public class ArrayUtils {
         }
         return tab3;
     }
+    public static Bataille.Cards[] fusion(Bataille.Cards[]tab1, Bataille.Cards[] tab2) {
+        Bataille.Cards[] tab3 = new Bataille.Cards[tab1.length+tab2.length];
+        for (int i = 0; i < tab1.length; i++){
+            tab3[i] = tab1[i];
+        }
+
+        for (int i = 0; i < tab2.length; i++) {
+            tab3[tab1.length + i] = tab2[i];
+        }
+        return tab3;
+    }
     /** Retourne un tableau avec une nouvelle valeur ajoutée **/
     public static int[] add(int[] pTab, int pValeurNouvelle) {
         int[] tab = {pValeurNouvelle};
+        return fusion(pTab, tab);
+    }
+    public static Bataille.Cards[] add(Bataille.Cards[] pTab, Bataille.Cards pValeurNouvelle) {
+        Bataille.Cards[] tab = {pValeurNouvelle};
         return fusion(pTab, tab);
     }
     /** Supprime un élément du tableau **/
