@@ -102,7 +102,7 @@ public class ArrayUtils {
     }
     /** Supprime un élément du tableau **/
     public static int[] remove(int[] pTab, int pIndiceASupprimer) {
-        int[] tab = new int[pTab.length - 1];
+        int[] tab = new int[pIndiceASupprimer];
         int pTabi = 0;
         int tabi = 0;
         while (tabi < tab.length) {

@@ -14,7 +14,7 @@ public class Bataille {
 
 
     public static Cards[] initCartes(){
-        return ArrayUtils.fusion(ArrayUtils.fusion(Cards.values(),Cards.values()),Cards.values());
+        return ArrayUtils.fusion(ArrayUtils.fusion(ArrayUtils.fusion(Cards.values(),Cards.values()),Cards.values()),Cards.values());
     }
 
 
@@ -61,16 +61,21 @@ public class Bataille {
 
     }
     public static void jeu (){
-        long temps = System.currentTimeMillis();
         Scanner input = new Scanner(System.in);
         System.out.println("Joueur 1 entrez votre nom:");
         p1Name = input.nextLine();
         System.out.println("Joueur 2 entrez votre nom:");
         p2Name = input.nextLine();
+        long temps = System.currentTimeMillis();
         while (p2.length > 0 && p1.length > 0){
             transfererCarte(tirerUneCarte(p1), tirerUneCarte(p2));
         }
-        System.out.println((p1.length == 0? p2Name : p1Name) + " gagne!" );
+        if (p1.length == 0 && p2.length == 0){
+            System.out.println("Egalité!");
+        }
+        else{
+            System.out.println((p1.length == 0? p2Name : p1Name) + " gagne!" );
+        }
         System.out.println("Total duration: " + (double)(System.currentTimeMillis() - temps) / 1000 + " s.");
     }
 
