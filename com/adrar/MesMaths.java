@@ -1,3 +1,5 @@
+package com.adrar;
+
 public class MesMaths {
     public static String signe(double age){ return age == 0 ? "nul" : age < 0 ? "négatif" : "positif"; }
     public static int plusGrand2(int nb1, int nb2){ return nb1 > nb2 ? nb1 : nb2; }

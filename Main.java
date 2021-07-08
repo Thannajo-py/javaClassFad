@@ -1,5 +1,8 @@
+import com.adrar.ArrayUtils;
+import com.adrar.Bataille;
+
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         int[] table = new int[10];
         ArrayUtils.fillTab(table);
         int[] table2 = new int[5];
@@ -20,12 +23,14 @@ public class Main {
         System.out.print("table 2 nb max occurence = ");
         System.out.println(ArrayUtils.maxOccurence(table2));
         System.out.print("fuuuuusion!!! = ");
-        ArrayUtils.printTab(ArrayUtils.fusion(table,table2));
+        ArrayUtils.printTab(ArrayUtils.fusion(table, table2));
         System.out.print("fuuuuusion!!!(cell(sept) version) = ");
-        ArrayUtils.printTab(ArrayUtils.add(table,7));
+        ArrayUtils.printTab(ArrayUtils.add(table, 7));
         System.out.print("suppression case 3 = ");
-        ArrayUtils.printTab(ArrayUtils.remove(table,3));
-
+        ArrayUtils.printTab(ArrayUtils.remove(table, 3));
+        Bataille.jeu();
     }
-
 }
+
+
+

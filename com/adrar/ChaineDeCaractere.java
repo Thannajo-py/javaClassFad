@@ -1,3 +1,5 @@
+package com.adrar;
+
 import static java.lang.Character.isUpperCase;
 
 public class ChaineDeCaractere {

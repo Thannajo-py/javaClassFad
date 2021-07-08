@@ -18,7 +18,7 @@ public class exo
 		String firstName = "Jonathan";
 		String lastName = "Audiffren";
 		int age = 34;
-		System.out.println("\" Je m'appelle" + " " + firstName + " " + lastName + "\net j'ai " + age +",\net j'en suis bien content. \"");
+		System.out.println("\" Je com.adrar.m'appelle" + " " + firstName + " " + lastName + "\net j'ai " + age +",\net j'en suis bien content. \"");
 		
 		
 		
@@ -29,3 +29,4 @@ public class exo
 		
 	}
 }
+

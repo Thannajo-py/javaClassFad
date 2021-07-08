@@ -1,3 +1,5 @@
+package com.adrar;
+
 public class ArrayUtils {
     /**Remplis le tableau de valeurs aléatoires comprises entre 0 et99 */
     public static void fillTab(int[] tab) {

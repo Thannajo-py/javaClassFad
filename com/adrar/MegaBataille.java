@@ -1,3 +1,5 @@
+package com.adrar;
+
 import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
@@ -113,7 +115,7 @@ public class MegaBataille {
                     winnerCards + ".\n " + looser + " a encore " + remaining +
                     (remaining > 1?" cartes " : "carte ") + "en main.");}
         else{
-            System.out.println("Bataille! "+ p1Name + " et " + p2Name + " mettent leur carte " + winnerCards + " ainsi qu'une autre dans le stack.");
+            System.out.println("com.adrar.Bataille! "+ p1Name + " et " + p2Name + " mettent leur carte " + winnerCards + " ainsi qu'une autre dans le stack.");
         }
     }
 

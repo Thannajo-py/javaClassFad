@@ -1,3 +1,5 @@
+package com.adrar;
+
 import java.util.Scanner;
 
 

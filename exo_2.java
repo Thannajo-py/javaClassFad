@@ -1,3 +1,6 @@
+import com.adrar.ChaineDeCaractere;
+import com.adrar.MesMaths;
+
 public class exo_2 {
     public static void main(String[] args){
         int[] age_test = {5,10,16,17,18,19,80};
