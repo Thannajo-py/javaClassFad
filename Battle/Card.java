@@ -25,10 +25,16 @@ class Card {
     public CardsName getValue(){
         return this.name;
     }
-    public String getName(){
+
+    public int compareTo(Card other){
+        return this.name.compareTo(other.name);
+    }
+
+    public String toString(){
         return (name + " de " + type);
     }
 }
+
 
 enum CardsType {
     PIQUE,
@@ -36,6 +42,8 @@ enum CardsType {
     CARREAU,
     COEUR
 }
+
+
 enum CardsName {
     AS,
     DEUX,

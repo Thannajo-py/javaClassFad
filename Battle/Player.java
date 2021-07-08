@@ -1,7 +1,5 @@
 package Battle;
 
-import java.util.ArrayList;
-
 class Player {
 
     /**************
@@ -15,7 +13,7 @@ class Player {
      * CONSTRUCTOR *
      ***************/
 
-    public Player(String name, ArrayList<Card> deck, int nb){
+    public Player(String name, Pile deck, int nb){
         this.name = name;
         this.deck = new Deck(nb,deck);
     }
@@ -26,12 +24,15 @@ class Player {
     /**********
      * METHOD *
      **********/
+
     public Card play(){
         return drawACard();
     }
+
     private Card drawACard() {
         return this.deck.drawACard();
     }
+
     public String getName(){
         return this.name;
     }
@@ -39,14 +40,33 @@ class Player {
     public void won(Card wonCard){
         this.deck.earnACard(wonCard);
     }
+
     public void lose(){
         this.deck.loseACard();
     }
+
+    public void lose(int nb){
+        this.deck.loseACard(nb);
+    }
+
     public int deckSize(){
         return this.deck.deckLength();
     }
-    public void setDeck(int nb, ArrayList<Card> deck) {
+
+    public void print(){
+        this.deck.print();
+    }
+
+    public void setDeck(int nb, Pile deck) {
         this.deck = new Deck();
         this.deck.setDeck(nb, deck);
+    }
+
+    public Card getFirstElement(){
+        return this.deck.getFirstElement();
+    }
+
+    public Card getElement(int nb){
+        return this.deck.getElement(nb);
     }
 }
