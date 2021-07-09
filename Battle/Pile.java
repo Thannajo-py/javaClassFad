@@ -15,25 +15,39 @@ public class Pile {
      ***************/
 
     Pile(int nb){
+
         ArrayList<Card> pile = new ArrayList<>();
         CardsName[] cardInit = CardsName.values();
         CardsType[] colorInit = CardsType.values();
-        for (int i = 0; i < cardInit.length ; i++){
-            for(int j = 0; j < colorInit.length; j++) {
-                Card instance = new Card(cardInit[i],colorInit[j]);
-                pile.add(instance);
+
+        for (CardsName value : cardInit){
+
+            for(CardsType color: colorInit) {
+
+                pile.add(new Card(value, color));
+
             }
+
         }
+
         ArrayList<Card> newDeck = new ArrayList<>(pile);
         this.deck = new ArrayList<>();
+
         for (int i = 0; i < nb; i++){
+
             int alea = (int) (Math.random()*newDeck.size());
             this.deck.add(newDeck.get(alea));
+
             if (newDeck.size() - 1 == 0){
+
                 newDeck = new ArrayList<>(pile);
+
             }
+
             else {
+
                 newDeck.remove(alea);
+
             }
         }
     }
@@ -43,6 +57,9 @@ public class Pile {
      **********/
 
     public ArrayList<Card> getPile(){
+
         return this.deck;
+
     }
+
 }

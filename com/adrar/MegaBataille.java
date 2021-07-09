@@ -5,6 +5,7 @@ import java.util.Scanner;
 import static java.lang.Integer.parseInt;
 
 public class MegaBataille {
+
     public static Cards[] deckP1;
     public static int deckP1Length;
     public static String p1Name;
@@ -21,28 +22,39 @@ public class MegaBataille {
 
 
     public static Cards[] initCartes(int nb){
+
         Cards[] deck = new Cards[2 * nb];
         Cards[] stack = Cards.values();
+
         for (int count = 0; count < nb; count++){
+
                 deck[count] = stack[count % stack.length];
+
         }
+
         return deck;
+
     }
 
 
     public static int tirerUneCarte(int deckLength){
+
         return (int)(Math.random()*deckLength);
     }
 
 
-    public static short quiGagneLeTour(Cards c1, Cards c2){
+    public static short quiGagneLeTour(Cards c1, Cards c2) {
+
         return (short)c1.compareTo(c2);
+
     }
 
 
     public static int perdreUneCarte(int deckLength, int loc, Cards[] deck){
+
         deck[loc] = deck[deckLength-1];
         return --deckLength;
+
     }
 
 
